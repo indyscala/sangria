@@ -29,4 +29,13 @@ object SchemaDefinition {
     ObjectTypeDescription("The vehicle manufacturer"),
     DocumentField("name", "Name of the manufacturer"),
   )
+
+  val QueryType = ObjectType("Query", fields[CountriesRepository, Unit](
+    Field("countries", ListType(CountryType),
+      description = Some("Returns a list of all available countries."),
+      resolve = _.ctx.countries),
+    )
+  )
+
+  val schema = Schema(QueryType)
 }
